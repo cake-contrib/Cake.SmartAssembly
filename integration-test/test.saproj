@@ -1,0 +1,12 @@
+<SmartAssemblyProject ProjectId="{916b63d9-0ba5-4584-a3d8-a37e87402ee2}" Version="2.0">
+    <MainAssemblyFileName>IntegrationTestSample\IntegrationTestSample\bin\Debug\net46\IntegrationTestSample.exe</MainAssemblyFileName>
+    <Configuration Name="Release">
+        <Destination DestinationFileName="IntegrationTestSample/IntegrationTestSample/bin/Debug/net46/IntegrationTestSample_sa.exe" />
+        <Options>
+            <StrongNameSigning TamperProtect="1" />
+            <ExceptionReporting />
+            <FeatureUsageReporting />
+        </Options>
+        <Assemblies />
+    </Configuration>
+</SmartAssemblyProject>

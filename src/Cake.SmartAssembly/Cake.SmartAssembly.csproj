@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net46</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net46|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net46|AnyCPU'">
+    <DocumentationFile>bin\Release\net46\Cake.SmartAssembly.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="Common\SmartAssemblyAliases.Common.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Cake.Core" Version="0.22.0" />
+  </ItemGroup>
+</Project>
