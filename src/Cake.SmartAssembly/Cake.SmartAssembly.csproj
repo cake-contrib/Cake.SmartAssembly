@@ -11,9 +11,6 @@
     <DocumentationFile>bin\Release\net46\Cake.SmartAssembly.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="Common\SmartAssemblyAliases.Common.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Cake.Core" Version="0.22.0" />
   </ItemGroup>
 </Project>
