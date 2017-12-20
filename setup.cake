@@ -11,7 +11,8 @@ BuildParameters.SetParameters(
     repositoryName: "Cake.SmartAssembly",
     appVeyorAccountName: "cakecontrib",
 	shouldRunDupFinder: false,
-    shouldRunInspectCode: false);
+    shouldRunInspectCode: false,
+	shouldRunCodecov: false);
 
 BuildParameters.PrintParameters(Context);
 
