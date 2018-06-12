@@ -36,7 +36,7 @@ http://cakebuild.net
 [CmdletBinding()]
 Param(
     [string]$Script = "setup.cake",
-	[ValidateSet("releasenotes", "Default")]
+	[ValidateSet("releasenotes", "Default", "AppVeyor")]
     [string]$Target = "Default",
     [ValidateSet("Release", "Debug")]
     [string]$Configuration = "Release",
