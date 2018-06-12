@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/cake-contrib/Cake.SmartAssembly</projectUrl>
     <iconUrl>https://cdn.rawgit.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</iconUrl>
     <description>SmartAssembly Addin for runing RedGate's SmartAssembly tool.</description>
-    <copyright>Copyright 2017 (c) Miha Markic and contributors</copyright>
+    <copyright>Copyright 2018 (c) Miha Markic and contributors</copyright>
     <tags>Cake Script Obfuscator SmartAssembly</tags>
     <repository type="GitHub" url="https://github.com/cake-contrib/Cake.SmartAssembly" />
   </metadata>

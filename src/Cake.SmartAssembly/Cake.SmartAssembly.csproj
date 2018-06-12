@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net46</TargetFramework>
@@ -11,6 +11,6 @@
     <DocumentationFile>bin\Release\net46\Cake.SmartAssembly.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Cake.Core" Version="0.22.0" />
+    <PackageReference Include="Cake.Core" Version="0.28.0" PrivateAssets="true" />
   </ItemGroup>
 </Project>
