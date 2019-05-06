@@ -15,7 +15,7 @@
     <repository type="GitHub" url="https://github.com/cake-contrib/Cake.SmartAssembly" />
   </metadata>
   <files>
-    <file src="net46/Cake.SmartAssembly.dll" target="lib/net46" />
-    <file src="net46/Cake.SmartAssembly.xml" target="lib/net46" />
+    <file src="netstandard2.0/Cake.SmartAssembly.dll" target="lib/netstandard2.0" />
+    <file src="netstandard2.0/Cake.SmartAssembly.xml" target="lib/netstandard2.0" />
   </files>
 </package>
