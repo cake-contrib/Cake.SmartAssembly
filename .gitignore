@@ -281,3 +281,4 @@ tools/**
 
 # Telerik's JustMock configuration file
 *.jmconfig
+BuildArtifacts/
