@@ -8,7 +8,7 @@
         /// <summary>
         /// Signing your assembly with a strong name key
         /// </summary>
-        public string KeyFilename { get; set; }
+        public string? KeyFilename { get; set; }
         /// <summary>
         /// Adding tamper protection to the assembly
         /// </summary>
@@ -71,15 +71,15 @@
         /// <summary>
         /// Setting the application name for use in error and feature usage reports
         /// </summary>
-        public string ReportAppName { get; set; }
+        public string? ReportAppName { get; set; }
         /// <summary>
         /// Setting the project name for use in error and feature usage reports
         /// </summary>
-        public string ReportProjectName { get; set; }
+        public string? ReportProjectName { get; set; }
         /// <summary>
         /// Setting the company name for use in error and feature usage reports
         /// </summary>
-        public string ReportCompanyName { get; set; }
+        public string? ReportCompanyName { get; set; }
         /// <summary>
         /// Enabling error reporting
         /// </summary>
@@ -87,6 +87,6 @@
         /// <summary>
         /// Enabling feature usage reporting
         /// </summary>
-        public string FeatureUsageTemplate { get; set; }
+        public string? FeatureUsageTemplate { get; set; }
     }
 }

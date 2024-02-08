@@ -17,7 +17,7 @@ namespace Cake.SmartAssembly
         /// <param name="environment"></param>
         /// <returns>The path of the latest SmartAssembly.com version</returns>
         /// <remarks>Throws if SmartAssembly isn't found.</remarks>
-        public static FilePath GetSmartAssemblyPath(IFileSystem fileSystem, ICakeEnvironment environment)
+        public static FilePath? GetSmartAssemblyPath(IFileSystem fileSystem, ICakeEnvironment environment)
         {
             if (fileSystem == null)
             {

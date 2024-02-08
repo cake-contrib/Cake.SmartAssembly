@@ -10,7 +10,7 @@ namespace Cake.SmartAssembly.Tests
         public static PropertyInfo NullableIntProperty => GetProperty(nameof(TestSettings.NullableInt));
         public static PropertyInfo GetProperty(string name)
         {
-            return typeof(TestSettings).GetProperty(name, BindingFlags.Public | BindingFlags.Instance);
+            return typeof(TestSettings).GetProperty(name, BindingFlags.Public | BindingFlags.Instance)!;
         }
         [TestFixture]
         public class GetArgumentFromNullableBoolProperty
@@ -79,7 +79,7 @@ namespace Cake.SmartAssembly.Tests
         {
             [TestCase("Name", ExpectedResult = "name")]
             [TestCase("NameExtended", ExpectedResult = "nameextended")]
-            public string WhenInput_ReturnsCorrectlyFormatted(string name)
+            public string? WhenInput_ReturnsCorrectlyFormatted(string name)
             {
                 return ArgumentsBuilderExtension.GetPropertyName(name);
             }
@@ -87,7 +87,7 @@ namespace Cake.SmartAssembly.Tests
 
         public class TestSettings : AutoToolSettings
         {
-            public string String { get; set; }
+            public string? String { get; set; }
             public bool? NullableBool { get; set; }
             public int? NullableInt { get; set; }
         }

@@ -36,7 +36,7 @@ namespace Cake.SmartAssembly
             var result = new List<string>();
             foreach (var property in typeof(AssemblyOptionSettings).GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
-                foreach (string argument in GetArgumentFromProperty(property, settings, preCommand: preCommand))
+                foreach (string? argument in GetArgumentFromProperty(property, settings, preCommand: preCommand))
                 {
                     if (!string.IsNullOrEmpty(argument))
                     {
@@ -54,7 +54,7 @@ namespace Cake.SmartAssembly
         /// <param name="settings">The settings.</param>
         /// <param name="preCommand">Pre or post command.</param>
         /// <returns></returns>
-        public static IEnumerable<string> GetArgumentFromProperty(PropertyInfo property, AssemblyOptionSettings settings, bool preCommand)
+        public static IEnumerable<string?> GetArgumentFromProperty(PropertyInfo property, AssemblyOptionSettings settings, bool preCommand)
         {
             var autoPropertyAttribute = GetAutoPropertyAttributeOrNull(property);
             var parameterAttribute = GetParameterAttributeOrNull(property);
@@ -69,7 +69,7 @@ namespace Cake.SmartAssembly
             {
                 if (property.PropertyType == typeof(bool))
                 {
-                    yield return GetArgumentFromBoolProperty(property, (bool)property.GetValue(settings));
+                    yield return GetArgumentFromBoolProperty(property, (bool?)property.GetValue(settings));
                 }
                 else if (property.PropertyType == typeof(bool?))
                 {
@@ -93,7 +93,7 @@ namespace Cake.SmartAssembly
                 }
                 else if (property.PropertyType == typeof(string))
                 {
-                    yield return GetArgumentFromStringProperty(property, (string)property.GetValue(settings), parameterAttribute);
+                    yield return GetArgumentFromStringProperty(property, (string?)property.GetValue(settings), parameterAttribute);
                 }
                 else if (property.PropertyType == typeof(TimeSpan?))
                 {
@@ -101,7 +101,7 @@ namespace Cake.SmartAssembly
                 }
                 else if (property.PropertyType == typeof(string[]))
                 {
-                    foreach (string arg in GetArgumentFromStringArrayProperty(property, (string[])property.GetValue(settings)))
+                    foreach (string? arg in GetArgumentFromStringArrayProperty(property, (string[]?)property.GetValue(settings)))
                     {
                         yield return arg;
                     }
@@ -115,9 +115,9 @@ namespace Cake.SmartAssembly
         /// <param name="property"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetArgumentFromAutoProperty(AutoPropertyAttribute attribute, PropertyInfo property, object value)
+        public static string? GetArgumentFromAutoProperty(AutoPropertyAttribute attribute, PropertyInfo property, object? value)
         {
-            if (value == null)
+            if (value == null || attribute.Format is null)
             {
                 return null;
             }
@@ -125,8 +125,8 @@ namespace Cake.SmartAssembly
             string result = string.Format(attribute.Format, GetPropertyName(property.Name), value);
             if (attribute.OnlyWhenTrue)
             {
-                bool boolvalue = (bool)value;
-                return boolvalue ? result : string.Empty;
+                bool boolValue = (bool)value;
+                return boolValue ? result : string.Empty;
             }
             else
             {
@@ -143,7 +143,7 @@ namespace Cake.SmartAssembly
         /// </summary>
         /// <param name="property"></param>
         /// <returns></returns>
-        public static AutoPropertyAttribute GetAutoPropertyAttributeOrNull(PropertyInfo property)
+        public static AutoPropertyAttribute? GetAutoPropertyAttributeOrNull(PropertyInfo property)
         {
             return property.GetCustomAttribute<AutoPropertyAttribute>();
         }
@@ -152,7 +152,7 @@ namespace Cake.SmartAssembly
         /// </summary>
         /// <param name="property"></param>
         /// <returns></returns>
-        public static ParameterAttribute GetParameterAttributeOrNull(PropertyInfo property)
+        public static ParameterAttribute? GetParameterAttributeOrNull(PropertyInfo property)
         {
             return property.GetCustomAttribute<ParameterAttribute>();
         }
@@ -162,9 +162,9 @@ namespace Cake.SmartAssembly
         /// <param name="property"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetArgumentFromBoolProperty(PropertyInfo property, bool value)
+        public static string? GetArgumentFromBoolProperty(PropertyInfo property, bool? value)
         {
-            return value ? $"{GetPropertyName(property.Name)}:{value.ToString().ToLower()}" : null;
+            return value == true ? $"{GetPropertyName(property.Name)}:true" : null;
         }
 
         /// <summary>
@@ -173,7 +173,7 @@ namespace Cake.SmartAssembly
         /// <param name="property"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetArgumentFromNullableIntProperty(PropertyInfo property, int? value)
+        public static string? GetArgumentFromNullableIntProperty(PropertyInfo property, int? value)
         {
             return value.HasValue ? $"{GetPropertyName(property.Name)}:{value.Value}" : null;
         }
@@ -183,7 +183,7 @@ namespace Cake.SmartAssembly
         /// <param name="property"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetArgumentFromNullableInt64Property(PropertyInfo property, Int64? value)
+        public static string? GetArgumentFromNullableInt64Property(PropertyInfo property, Int64? value)
         {
             return value.HasValue ? $"{GetPropertyName(property.Name)}:{value.Value}" : null;
         }
@@ -193,7 +193,7 @@ namespace Cake.SmartAssembly
         /// <param name="property"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetArgumentFromNullableUInt64Property(PropertyInfo property, UInt64? value)
+        public static string? GetArgumentFromNullableUInt64Property(PropertyInfo property, UInt64? value)
         {
             return value.HasValue ? $"{GetPropertyName(property.Name)}:{value.Value}" : null;
         }
@@ -203,7 +203,7 @@ namespace Cake.SmartAssembly
         /// <param name="property"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetArgumentFromNullableUInt16Property(PropertyInfo property, UInt16? value)
+        public static string? GetArgumentFromNullableUInt16Property(PropertyInfo property, UInt16? value)
         {
             return value.HasValue ? $"{GetPropertyName(property.Name)}:{value.Value}" : null;
         }
@@ -215,11 +215,11 @@ namespace Cake.SmartAssembly
         /// <param name="parameter"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetArgumentFromNullableBoolProperty(PropertyInfo property, bool? value, ParameterAttribute parameter)
+        public static string? GetArgumentFromNullableBoolProperty(PropertyInfo property, bool? value, ParameterAttribute? parameter)
         {
             if (value.HasValue)
             {
-                return $"{GetPropertyName(property.Name)}:{value.ToString().ToLower()}";
+                return $"{GetPropertyName(property.Name)}:{value.ToString()!.ToLower()}";
             }
             return null;
         }
@@ -230,9 +230,9 @@ namespace Cake.SmartAssembly
         /// <param name="property"></param>
         /// <param name="values"></param>
         /// <returns></returns>
-        public static IEnumerable<string> GetArgumentFromDictionaryProperty(PropertyInfo property, Dictionary<string, string> values)
+        public static IEnumerable<string?> GetArgumentFromDictionaryProperty(PropertyInfo property, Dictionary<string, string>? values)
         {
-            if (values != null)
+            if (values is not null)
             {
                 foreach (var kp in values)
                 {
@@ -247,9 +247,9 @@ namespace Cake.SmartAssembly
         /// <param name="property"></param>
         /// <param name="values"></param>
         /// <returns></returns>
-        public static IEnumerable<string> GetArgumentFromStringArrayProperty(PropertyInfo property, string[] values)
+        public static IEnumerable<string?> GetArgumentFromStringArrayProperty(PropertyInfo property, string[]? values)
         {
-            if (values != null)
+            if (values is not null)
             {
                 foreach (string value in values)
                 {
@@ -265,7 +265,7 @@ namespace Cake.SmartAssembly
         /// <param name="value"></param>
         /// <param name="parameter"></param>
         /// <returns></returns>
-        public static string GetArgumentFromStringProperty(PropertyInfo property, string value, ParameterAttribute parameter)
+        public static string? GetArgumentFromStringProperty(PropertyInfo property, string? value, ParameterAttribute? parameter)
         {
             if (!string.IsNullOrEmpty(value))
             {
@@ -280,7 +280,7 @@ namespace Cake.SmartAssembly
         /// <param name="property"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string GetArgumentFromNullableTimeSpanProperty(PropertyInfo property, TimeSpan? value)
+        public static string? GetArgumentFromNullableTimeSpanProperty(PropertyInfo property, TimeSpan? value)
         {
             return value.HasValue ? $"{GetPropertyName(property.Name)}:{ConvertTimeSpan(value.Value)}" : null;
         }
@@ -301,9 +301,9 @@ namespace Cake.SmartAssembly
         /// <param name="name"></param>
         /// <returns></returns>
         /// <example>NoForce -> no-force</example>
-        public static string GetPropertyName(string name)
+        public static string? GetPropertyName(string name)
         {
-            string result = null;
+            string? result = null;
             if (!string.IsNullOrEmpty(name))
             {
                 result = name.ToLower();

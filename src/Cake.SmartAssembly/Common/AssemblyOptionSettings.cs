@@ -9,7 +9,7 @@
         /// The name of the assembly.
         /// </summary>
         [AutoProperty(PreCommand = true)]
-        public string Assembly { get; set; }
+        public string? Assembly { get; set; }
         /// <summary>
         /// Enable / Disable pruning
         /// </summary>
