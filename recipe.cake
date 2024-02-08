@@ -12,7 +12,7 @@ BuildParameters.SetParameters(
     appVeyorAccountName: "cakecontrib",
 	shouldPostToGitter: false,
 	shouldRunInspectCode: false,
-	uldRunCodecov: false,
+	shouldRunCodecov: false,
 	shouldRunDotNetCorePack: true,
 	shouldRunCoveralls: false); // Disabled because it's currently failing
 
